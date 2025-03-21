@@ -1,0 +1,258 @@
+:root {
+    --dark: #374151;
+    --darker: #1F2937;
+    --darkest: #111827;
+    --grey: #54589b;
+    --pink: #EC4899;
+    --purple: #8B5CF6;
+    --light: #EEE;
+    --peach: #fad0c4;
+}
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Fira Sans", sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    color: #FFF;
+    background-color: var(--darkest);
+}
+
+header {
+    padding: 2rem 1rem;
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+header h1 {
+        font-family: 'Poppins', sans-serif;
+        font-size: 3rem;
+        color: #fff;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-bottom: 20px;
+        animation: glow 2s ease-in-out infinite alternate;
+    }
+    
+    /* Fancy glowing effect */
+    @keyframes glow {
+        from {
+            text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff;
+        }
+        to {
+            text-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff, 0 0 40px #00ffff;
+        }
+    }
+
+#new-task-form {
+    display: flex;
+    gap: 1rem;
+}
+
+input,
+button {
+    all: unset;
+}
+
+#new-task-input {
+    flex: 1 1 0%;
+	background-color: var(--darker);
+	padding: 1rem;
+	border-radius: 1rem;
+	margin-right: 1rem;
+	color: var(--light);
+	font-size: 1.25rem;
+	border: 1px solid transparent;
+	transition: 0.3s ease;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+}
+#new-task-input:focus {
+	border: 1px solid var(--pink);
+	box-shadow: 0 0 15px var(--pink);
+}
+
+#new-task-input::placeholder {
+    color: var(--grey);
+}
+
+#new-task-submit {
+	color: var(--pink);
+	font-size: 1.25rem;
+	font-weight: 700;
+	background-image: linear-gradient(to right, var(--pink), var(--purple));
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	cursor: pointer;
+	transition: transform 0.3s ease-in-out;
+	animation: floatButton 2s ease-in-out infinite;
+}
+
+@keyframes floatButton {
+	0%, 100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-3px);
+	}
+}
+
+#new-task-submit:hover {
+    opacity: 0.8;
+}
+
+#new-task-submit:active {
+    opacity: 0.6;
+}
+
+main {
+    flex-grow: 1;
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.task-list {
+    padding: 1rem;
+}
+
+.task-list h2 {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--grey);
+    margin-bottom: 1rem;
+}
+
+#tasks .task {
+    display: flex;
+	align-items: center; /* Align everything vertically centered */
+	justify-content: space-between;
+	background: rgba(101, 200, 250, 0.964);
+	backdrop-filter: blur(10px);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	padding: 1rem;
+	border-radius: 1rem;
+	margin-bottom: 1rem;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+	transition: transform 0.2s ease-in-out;
+	gap: 0.5rem; /* Add slight spacing between elements */
+}
+
+#tasks .task:hover {
+    transform: translateY(-3px);
+}
+
+.task .content {
+    display: flex;
+	align-items: center; /* Ensure checkbox and text stay aligned */
+	gap: 0.5rem;
+	flex-grow: 1;
+}
+
+.task .content .text {
+    color: var(--darkest);
+    font-size: 1.125rem;
+    width: 100%;
+    display: block;
+    transition: color 0.3s ease-in-out;
+}
+
+.task .content .text:not(:read-only) {
+    color: var(--pink);
+}
+
+.task .actions {
+    display: flex;
+	gap: 0.5rem;
+	align-items: center; 
+}
+
+.task .actions button {
+    cursor: pointer;
+	margin: 0 0.5rem;
+	font-size: 1.125rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	transition: transform 0.2s ease-in-out, opacity 0.4s;
+	padding: 0.4rem 0.8rem;
+	border-radius: 0.5rem;
+}
+
+.task .actions button:hover {
+    transform: scale(1.1);
+	opacity: 0.8;
+}
+
+.task .actions button:active {
+    opacity: 0.6;
+}
+
+.task .actions .edit {
+    background: linear-gradient(145deg, #ff9a9e, #fad0c4);
+	color: #111827;
+}
+
+.task .actions .delete {
+    background: linear-gradient(145deg, #ff5f6d, #bc65eb);
+	color: #111827;
+}
+.task-check {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--grey);
+  border-radius: 50%;
+  margin-right: 10px;
+  cursor: pointer;
+  position: relative;
+  transition: 0.3s ease;
+}
+
+/* Checkbox tick animation */
+.task-check:checked {
+  background: linear-gradient(145deg, var(--pink), var(--purple));
+  border-color: var(--purple);
+  box-shadow: 0 0 10px var(--pink);
+}
+
+.task-check:checked::before {
+  content: "✔";
+  color: #fff;
+  font-size: 1rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Task strike-through on check */
+.task-check:checked + .text {
+  text-decoration: line-through;
+  color: var(--grey);
+  opacity: 0.7;
+  transition: 0.3s ease;
+}
+.completion-message {
+    font-size: 1.2rem;
+    color: #4CAF50;
+    text-align: center;
+    margin-top: 20px;
+    animation: pop-up 0.5s ease-in-out;
+}
+
+@keyframes pop-up {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
